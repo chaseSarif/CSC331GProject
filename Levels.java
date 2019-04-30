@@ -12,6 +12,10 @@ public class Levels {
     public Levels(int level){
         this.level = level;
     }
+    
+    public int getLevel(){
+        return level;
+    }    
 
     public void computeStats(int guesses){
         this.scores.add(guesses);
