@@ -15,11 +15,21 @@ public class Levels {
     
     public int getLevel(){
         return level;
+    }
+    
+    public void setScores(ArrayList<Integer> freshScores){
+        this.scores = freshScores;
     }    
 
     public void computeStats(int guesses){
         this.scores.add(guesses);
     }
+    
+    public void addStats(int totalGuesses){
+        System.out.println(totalGuesses);
+        this.scores.add(totalGuesses);
+        System.out.println(scores.size());
+    }    
 
     public void computeAverage(){
         avrgGuess = this.totalGuesses / scores.size();
