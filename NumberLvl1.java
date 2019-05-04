@@ -26,7 +26,7 @@ public class NumberLvl1 {
 		while(guess!= answer) {
 			
 			if(guess < answer) {
-				System.out.println("Hint: Try Higer");
+				System.out.println("Hint: Try Higher");
 				
 			}
 				
