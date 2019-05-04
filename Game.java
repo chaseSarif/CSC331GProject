@@ -17,13 +17,8 @@ public class Game extends GameTest{
 		lvl = level;
 		
 		for(int i=0; i<level; i++) {
-			
 			Random randNumGen = new Random();
-			
 			int num = randNumGen.nextInt(10);
-			
-
-			
 			gameAnswer.add(num);
 			
 		}
@@ -82,7 +77,6 @@ public class Game extends GameTest{
 
 
 	public String checkValue(String input) {
-		// TODO Auto-generated method stub
 
 		// this method takes in a string input that will come from the gui. Then checks if it is in
 		// the correct answer at all and counts how many times it is correct and how many times it is
