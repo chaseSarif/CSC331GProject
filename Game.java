@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
@@ -10,17 +13,23 @@ public class Game extends GameTest{
 	public String clue;	
 	public final int lvl;
 	int randNumb = 1;
+	public int maxNum;
 
 
-	public Game(int level) {
-		
+	public Game(int level, int userMax) {
+		this.maxNum = userMax;
 		lvl = level;
-		
+
 		for(int i=0; i<level; i++) {
+
 			Random randNumGen = new Random();
+
 			int num = randNumGen.nextInt(10);
+
+
+
 			gameAnswer.add(num);
-			
+
 		}
 	}
 
@@ -49,14 +58,63 @@ public class Game extends GameTest{
 
 	public int getMax() {
 		// TODO Auto-generated method stub
-		return 0;
+		return maxNum;
 	}
 
 
-	public void getInput() {
-		// TODO Auto-generated method stub
+	public String getInput(String input) {
+		/**
+		 * Requests input from the keyboard, validates that its numeric, and returns an Int
+		 * @return Numeric keyboard input.
+		 */
+		StringTokenizer token = new StringTokenizer(input,",");
 
+		int i = 0;
+		int numbLeft = 0;
+		int numbRight = 0;
+		int posRight = 0;
+
+		int maxNum = token.countTokens();
+
+		String returnString = "(" + input + ")";
+
+		// Variable initialization
+		//String userInput = null;
+		Integer userInputInt = 0;
+
+
+		System.out.print("Please enter your guess: ");
+		BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+
+		// Pulls keyboard input
+		try {
+			returnString = keyboard.readLine();
+		} catch (IOException e) {
+			System.out.println("Unable to read input from keyboard");
+		}
+
+		// Check for invalid guess types
+		Boolean repeat = true;
+		while ( repeat ) {
+			try {  // If .parseInt works, repeat is set to false and loop ends
+				userInputInt = Integer.parseInt(returnString);
+				repeat = false;
+			} catch ( NumberFormatException e ) {  // Catches invalid guess. Prints error message, prompts for new keyboard input
+				System.out.print("Invalid input. Try again: ");
+				try {
+					returnString = keyboard.readLine();
+					maxNum ++;
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				repeat = true;
+			}
+		}
+		return returnString;
 	}
+
+
 
 
 	public int getRand() {
@@ -77,6 +135,7 @@ public class Game extends GameTest{
 
 
 	public String checkValue(String input) {
+		// TODO Auto-generated method stub
 
 		// this method takes in a string input that will come from the gui. Then checks if it is in
 		// the correct answer at all and counts how many times it is correct and how many times it is
